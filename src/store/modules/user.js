@@ -1,4 +1,4 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/modules/login'
+import { loginByUsername, logout, getUserInfo } from '@/api/modules/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -46,12 +46,12 @@ const user = {
   actions: {
     // 用户名登录
     LoginByUsername({ commit }, userInfo) {
-      const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        loginByUsername(username, userInfo.password).then(response => {
-          const data = response.data
-          commit('SET_TOKEN', data.token)
-          setToken(response.data.token)
+        loginByUsername(userInfo).then(res => {
+          console.log(res);
+
+          commit('SET_TOKEN', res.token)
+          setToken(res.token)
           resolve()
         }).catch(error => {
           reject(error)
@@ -62,22 +62,22 @@ const user = {
     // 获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(response => {
-          if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
+        getUserInfo(state.token).then(res => {
+          if (!res.data) {
             reject('error')
           }
-          const data = response.data
+          const data = res.data
 
           if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', data.roles)
           } else {
-            reject('getInfo: roles must be a non-null array !')
+            reject('获取用户信息: 角色必须为非空数组 !')
           }
 
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           commit('SET_INTRODUCTION', data.introduction)
-          resolve(response)
+          resolve(res)
         }).catch(error => {
           reject(error)
         })
@@ -88,9 +88,9 @@ const user = {
     // LoginByThirdparty({ commit, state }, code) {
     //   return new Promise((resolve, reject) => {
     //     commit('SET_CODE', code)
-    //     loginByThirdparty(state.status, state.email, state.code).then(response => {
-    //       commit('SET_TOKEN', response.data.token)
-    //       setToken(response.data.token)
+    //     loginByThirdparty(state.status, state.email, state.code).then(res => {
+    //       commit('SET_TOKEN', res.data.token)
+    //       setToken(res.data.token)
     //       resolve()
     //     }).catch(error => {
     //       reject(error)
@@ -126,8 +126,8 @@ const user = {
       return new Promise(resolve => {
         commit('SET_TOKEN', role)
         setToken(role)
-        getUserInfo(role).then(response => {
-          const data = response.data
+        getUserInfo(role).then(res => {
+          const data = res.data
           commit('SET_ROLES', data.roles)
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)

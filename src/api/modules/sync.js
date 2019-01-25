@@ -1,6 +1,6 @@
-import Api from '../commonUtils';
+import request from '../commonUtils';
 
 // 同步
-export const sync = (params: object) => {
-  return Api.request('/sync', params, 'post');
+export const sync = (params) => {
+  return request('/sync', params, 'post');
 };

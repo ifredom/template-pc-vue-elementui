@@ -1,11 +1,24 @@
-import Api from '../commonUtils';
+import Qs from 'qs';
+import request from '../commonUtils';
 
-export const loginByUsername = (params)=> {
-  return Api.request('/login/login', params, 'post');
+export const loginByUsername = (data) => {
+  return request({
+    url: '/login/login',
+    method: 'post',
+    data: data
+  });
 }
-export const logout = (params)=> {
-  return Api.request('/login/logout', params, 'post');
+export const logout = (data) => {
+  return request({
+    url: '/login/logout',
+    data: data,
+    method: 'post'
+  });
 }
-export const getUserInfo = (params)=> {
-  return Api.request('/user/info', params, 'get');
+export const getUserInfo = (data) => {
+  return request({
+    url: '/user/info',
+    data: data,
+    method: 'get'
+  });
 }
