@@ -1,37 +1,81 @@
 <template>
-  <div class="layout-wrapper">
-    <HelloWorld msg="Welcome to Your Vue.js + Elementui App" />
-    <img src="../../assets/logo.png">
-
-
-    <PlatForm></PlatForm>
-
-    <div id="nav" style="margin-top:20px;">
-      <router-link to="/login">前往登陆页面</router-link>
+  <div :class="classObj" class="app-wrapper">
+    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <sidebar class="sidebar-container" />
+    <div class="main-container">
+      <navbar />
+      <tags-view />
+      <app-main />
     </div>
-
   </div>
 </template>
 
 <script>
-  import PlatForm from "./PlatForm";
-  import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+  import {
+    Navbar,
+    Sidebar,
+    AppMain,
+    TagsView
+  } from './components'
+  import ResizeMixin from './mixin/ResizeHandler'
 
   export default {
-    name: "Layout",
+    name: 'Layout',
     components: {
-      PlatForm,
-      HelloWorld
+      Navbar,
+      Sidebar,
+      AppMain,
+      TagsView
+    },
+    mixins: [ResizeMixin],
+    computed: {
+      sidebar() {
+        return this.$store.state.app.sidebar
+      },
+      device() {
+        return this.$store.state.app.device
+      },
+      classObj() {
+        return {
+          hideSidebar: !this.sidebar.opened,
+          openSidebar: this.sidebar.opened,
+          withoutAnimation: this.sidebar.withoutAnimation,
+          mobile: this.device === 'mobile'
+        }
+      }
+    },
+    methods: {
+      handleClickOutside() {
+        this.$store.dispatch('closeSideBar', {
+          withoutAnimation: false
+        })
+      }
     }
-  };
+  }
 </script>
 
 <style lang="stylus" scoped>
-  @import '~@/style/mixin.styl';
+  @import "~@/style/base.styl";
 
-  .layout-wrapper {
+  .app-wrapper {
+    @include clearfix;
+    position: relative;
     height: 100%;
     width: 100%;
-    background: pink;
+
+    &.mobile.openSidebar {
+      position: fixed;
+      top: 0;
+    }
+  }
+
+  .drawer-bg {
+    background: #000;
+    opacity: 0.3;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
   }
 </style>

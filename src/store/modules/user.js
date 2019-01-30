@@ -48,11 +48,9 @@ const user = {
     LoginByUsername({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         loginByUsername(userInfo).then(res => {
-          console.log(res);
-
-          commit('SET_TOKEN', res.token)
-          setToken(res.token)
-          resolve()
+          commit('SET_TOKEN', res.data.token)
+          setToken(res.data.token)
+          resolve(res)
         }).catch(error => {
           reject(error)
         })

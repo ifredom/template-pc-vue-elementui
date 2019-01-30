@@ -16,12 +16,18 @@ import './icons'; // 图标
 import './errorLog'; // 错误日志
 import './mock'; // 模拟数据
 
+import * as filters from './filters' // global filters
+
 Vue.config.productionTip = false;
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })
 
+// register global utility filters.
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 new Vue({
   router,

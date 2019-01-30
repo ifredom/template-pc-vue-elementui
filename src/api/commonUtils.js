@@ -1,5 +1,4 @@
 import axios from "axios";
-import NProgress from "nprogress";
 import Qs from "qs";
 import router from "@/router";
 import {
@@ -9,24 +8,21 @@ import {
   baseURL
 } from "@/api";
 
-
 const service = axios.default.create({
   baseURL: baseURL, // api请求的baseURL
-  timeout: 0,
+  timeout: 5000,
   // withCredentials: true, // 允许跨域 cookie
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
-  },
-  maxContentLength: 2000,
-
+  }
 });
 
 service.interceptors.request.use(
   config => {
-    // 对请求参数做加密
-    if (config.method === "post" || config.method === "get") {}
-    console.log(config);
-
+    if (config.method === "get") {
+      // axios要求get请求使用params传参，post请求使用data传参.
+      config.params = { ...config.data }
+    }
     return config;
   },
   error => {
@@ -41,20 +37,18 @@ service.interceptors.request.use(
 // 返回数据的判断校验
 service.interceptors.response.use(
   response => {
-    // 返回错误标志
-    console.log(response);
-
-    if (response.data && response.data.code + "" !== 0) {
+    // 返回错误
+    if (response.data && response.data.code !== 0) {
       Message({
         type: 'error',
         msg: response.data.msg
       });
       return Promise.reject(new Error(response.data.msg));
     }
-    return response;
+    return response.data;
   },
   error => {
-    let requestData = eval("(" + error.response.config.data + ")");
+    // 网络异常时
     if (error.response.status === 404) {
       router.push("/index/404");
     } else if (error.response.status === 500) {

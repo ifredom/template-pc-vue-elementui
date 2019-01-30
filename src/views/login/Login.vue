@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="page-login">
-      <h3 class="login-title">用户登录</h3><br>
+      <h3 class="login-title">归属</h3><br>
       <el-form :model="formData" :rules="formRules" ref="form">
         <el-form-item prop="username">
           <el-input placeholder="账号" v-model.trim="formData.username" @keyup.enter.native="handleLogin('form')">
@@ -15,10 +15,12 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" class="large-btn" @click="handleLogin('form')">登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
+          <el-button :loading="loading" type="primary" @click.prevent="handleLogin('form')">入</el-button>
         </el-form-item>
       </el-form>
     </div>
+
+    <Bubble></Bubble>
   </div>
 </template>
 
@@ -26,9 +28,13 @@
   import {
     isvalidUsername
   } from "@/utils/validate";
+ import Bubble from "@/components/BubbleAnimation/Bubble";
 
   export default {
     name: "Login",
+    components:{
+      Bubble
+    },
     data() {
       const validateUsername = (rule, value, callback) => {
         if (value == "") {
@@ -91,11 +97,12 @@
             this.$store
               .dispatch("LoginByUsername", this.formData)
               .then(res => {
-                console.log(res);
-                this.loading = false;
-                this.$router.push({
-                  path: this.redirect || "/"
-                });
+                if(res.code===0){
+                  this.loading = false;
+                  this.$router.push({
+                    path:  this.redirect || "/index"
+                  });
+                }
               })
               .catch(() => {
                 this.loading = false;
@@ -111,19 +118,23 @@
 </script>
 
 <style lang="stylus" scoped>
+
   .page {
     display: flex;
     justify-content: center;
     align-items: center;
     width: inherit;
     height: inherit;
-    background-color: #f2efb6;
+    /* background-color: #f2efb6; */
+    background: url('../../assets/custom_imags/bg.jpg');
+    z-index: 1;
   }
 
   .page-login {
     width: 360px;
-    background-color: #a0edf7;
+    background-color: #add2c9;
     padding: 15px;
     border-radius: 10px;
+    z-index: 99;
   }
 </style>

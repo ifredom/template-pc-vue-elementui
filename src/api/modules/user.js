@@ -4,21 +4,21 @@ import request from '../commonUtils';
 export const loginByUsername = (data) => {
   return request({
     url: '/login/login',
-    method: 'post',
-    data: data
+    method: 'get',
+    data: data,
   });
 }
 export const logout = (data) => {
   return request({
     url: '/login/logout',
+    method: 'post',
     data: data,
-    method: 'post'
   });
 }
 export const getUserInfo = (data) => {
   return request({
     url: '/user/info',
+    method: 'get',
     data: data,
-    method: 'get'
   });
 }
