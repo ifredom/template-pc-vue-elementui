@@ -41,14 +41,13 @@ const logoutResponse = {
 }
 
 export const loginByUsername = data => {
-  return userMap[data.username]
-  // return new Promise((resolve, reject) => resolve(userMap[data.username]));
+  return resolve(userMap[data.username])
 }
 export const getUserInfo = data => {
-  return new Promise((resolve, reject) => resolve(userMap[data.username]))
+  return resolve(userMap[data.username])
 }
 export const logout = () => {
-  return new Promise((resolve, reject) => resolve(logoutResponse))
+  return resolve(logoutResponse)
 }
 
 export default {
