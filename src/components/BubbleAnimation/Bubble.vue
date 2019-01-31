@@ -20,6 +20,6 @@
 </script>
 
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
   @import '~@/style/components/css3bg.css'
 </style>

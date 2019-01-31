@@ -11,7 +11,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import i18n from './lang' // 国际化
 
-import '@/style/index.styl'; // 全局 css
+import '@/styles/index.scss' // 全局 css
+
 import './icons'; // 图标
 import './errorLog'; // 错误日志
 import './mock'; // 模拟数据

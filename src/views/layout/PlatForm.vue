@@ -9,11 +9,11 @@ export default {
   components: {}
 };
 </script>
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .PlatForm {
   display: flex;
   align-items: center;
-  justify-content center
+  justify-content: center;
   width: 100%;
   height: 200px;
   background: orange;

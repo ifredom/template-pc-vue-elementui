@@ -16,8 +16,7 @@ const routes = [{
     path: '/index',
     redirect: '/index/workplat',
     component: resolve => require(['@/views/layout/Index'], resolve),
-    children: [
-      {
+    children: [{
         name: '404',
         path: '404',
         component: resolve => require(['@/components/common/errorPage/404'], resolve)
@@ -40,4 +39,22 @@ const routes = [{
     }
   }
 ];
+
+export const constantRouterMap = [{
+    path: '/login',
+    component: () => import('@/views/layout/Index'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/components/common/errorPage/404'),
+    hidden: true
+  },
+  {
+    path: '/HelloWorld',
+    component: () => import('@/views/HelloWorld')
+  },
+]
+
+
 export default routes;

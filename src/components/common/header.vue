@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
 headerHeight = 2.8125rem;
 imgheight = 1.125rem;
 imgbottom = 1.40625rem;

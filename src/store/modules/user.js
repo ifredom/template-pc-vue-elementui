@@ -1,5 +1,18 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/modules/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+// import {
+//   loginByUsername,
+//   logout,
+//   getUserInfo
+// } from '@/api/modules/user' // 使用api接口数据
+import {
+  loginByUsername,
+  logout,
+  getUserInfo
+} from '@/mock/login' // 使用mock数据
+import {
+  getToken,
+  setToken,
+  removeToken
+} from '@/utils/auth'
 
 const user = {
   state: {
@@ -45,20 +58,27 @@ const user = {
 
   actions: {
     // 用户名登录
-    LoginByUsername({ commit }, userInfo) {
+    LoginByUsername({
+      commit
+    }, userInfo) {
       return new Promise((resolve, reject) => {
         loginByUsername(userInfo).then(res => {
+          console.log(res);
           commit('SET_TOKEN', res.data.token)
           setToken(res.data.token)
           resolve(res)
         }).catch(error => {
+          console.log(error);
           reject(error)
         })
       })
     },
 
     // 获取用户信息
-    GetUserInfo({ commit, state }) {
+    GetUserInfo({
+      commit,
+      state
+    }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(res => {
           if (!res.data) {
@@ -97,7 +117,10 @@ const user = {
     // },
 
     // 登出
-    LogOut({ commit, state }) {
+    LogOut({
+      commit,
+      state
+    }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
@@ -111,7 +134,9 @@ const user = {
     },
 
     // 前端 登出
-    FedLogOut({ commit }) {
+    FedLogOut({
+      commit
+    }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
         removeToken()
@@ -120,7 +145,10 @@ const user = {
     },
 
     // 动态修改权限
-    ChangeRoles({ commit, dispatch }, role) {
+    ChangeRoles({
+      commit,
+      dispatch
+    }, role) {
       return new Promise(resolve => {
         commit('SET_TOKEN', role)
         setToken(role)

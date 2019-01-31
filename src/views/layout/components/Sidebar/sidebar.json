@@ -1,0 +1,60 @@
+{
+  "msg": "success",
+  "code": "0",
+  "data": {
+    "childList": [{
+      "childList": [{
+        "childList": [{
+          "childList": [],
+          "data": {
+            "menuEntity": 300001,
+            "menuIcon": "icon iconfont icon-fangchanguanli",
+            "menuId": 300001,
+            "menuTitle": "二级菜单",
+            "menuUrl": "/index/basics/house",
+            "parentId": 200001,
+            "sortId": 2,
+            "tenantId": 300
+          },
+          "parent": {
+            "menuEntity": 100085,
+            "menuIcon": "icon iconfont icon-fangchanguanli",
+            "menuId": 100085,
+            "menuTitle": "一级菜单",
+            "parentId": 200001,
+            "sortId": 2,
+            "tenantId": 200
+          }
+        }],
+        "data": {
+          "menuEntity": 100085,
+          "menuIcon": "icon iconfont icon-fangchanguanli",
+          "menuId": 100085,
+          "menuTitle": "一级菜单",
+          "menuUrl": "/index/basics/house",
+          "parentId": 200001,
+          "sortId": 2,
+          "tenantId": 200
+        },
+        "parent": {
+          "menuEntity": 100001,
+          "menuIcon": "icon iconfont icon-tongyongshezhi",
+          "menuId": 100001,
+          "menuTitle": "顶级菜单",
+          "parentId": 0,
+          "sortId": 2,
+          "tenantId": 100
+        }
+      }],
+      "data": {
+        "menuEntity": 100001,
+        "menuIcon": "icon iconfont icon-tongyongshezhi",
+        "menuId": 100001,
+        "menuTitle": "顶级菜单",
+        "parentId": 0,
+        "sortId": 2,
+        "tenantId": 100
+      }
+    }]
+  }
+}
