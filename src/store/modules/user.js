@@ -58,24 +58,24 @@ const user = {
 
   actions: {
     // 用户名登录
-    LoginByUsername({
+    LoginByUsername ({
       commit
     }, userInfo) {
       return new Promise((resolve, reject) => {
         loginByUsername(userInfo).then(res => {
-          console.log(res);
+          console.log(res)
           commit('SET_TOKEN', res.data.token)
           setToken(res.data.token)
           resolve(res)
         }).catch(error => {
-          console.log(error);
+          console.log(error)
           reject(error)
         })
       })
     },
 
     // 获取用户信息
-    GetUserInfo({
+    GetUserInfo ({
       commit,
       state
     }) {
@@ -117,7 +117,7 @@ const user = {
     // },
 
     // 登出
-    LogOut({
+    LogOut ({
       commit,
       state
     }) {
@@ -134,7 +134,7 @@ const user = {
     },
 
     // 前端 登出
-    FedLogOut({
+    FedLogOut ({
       commit
     }) {
       return new Promise(resolve => {
@@ -145,7 +145,7 @@ const user = {
     },
 
     // 动态修改权限
-    ChangeRoles({
+    ChangeRoles ({
       commit,
       dispatch
     }, role) {

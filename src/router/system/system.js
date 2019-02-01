@@ -8,6 +8,6 @@ export default [
   },
   {
     path: '/login',
-    component: (r) => require.ensure([], () => r(require('@/views/login/Login')), 'Login'),
+    component: (r) => require.ensure([], () => r(require('@/views/login/Login')), 'Login')
   }
 ]

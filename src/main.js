@@ -1,11 +1,11 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import Cookies from 'js-cookie'
-import App from './App';
-import router from './router';
-import store from './store';
-import './registerServiceWorker';
+import App from './App'
+import router from './router'
+import store from './store'
+import './registerServiceWorker'
 
-import 'normalize.css/normalize.css'; // CSS样式重置
+import 'normalize.css/normalize.css' // CSS样式重置
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -13,13 +13,13 @@ import i18n from './lang' // 国际化
 
 import '@/styles/index.scss' // 全局 css
 
-import './icons'; // 图标
-import './errorLog'; // 错误日志
-import './mock'; // 模拟数据
+import './icons' // 图标
+import './errorLog' // 错误日志
+import './mock' // 模拟数据
 
 import * as filters from './filters' // global filters
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
@@ -35,6 +35,6 @@ new Vue({
   store,
   i18n,
   render: function (h) {
-    return h(App);
+    return h(App)
   }
-}).$mount('#app');
+}).$mount('#app')

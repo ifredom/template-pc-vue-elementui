@@ -1,10 +1,12 @@
 <template>
   <footer class="tabbar">
     <ul class="tabbar-box">
-      <li class="tabbar-item" v-for="(item,index) in list" :key="index+'lm'">
-        <router-link  :class="{ active: item.path == $route.path }" :to="item.path">
-          <span class="icon iconfont" :class="item.icon"></span>
-          <span class="tab-label">{{item.title}}</span>
+      <li v-for="(item,index) in list" :key="index+'lm'" class="tabbar-item">
+        <router-link :class="{ active: item.path == $route.path }" :to="item.path">
+          <span class="icon iconfont" :class="item.icon" />
+          <span class="tab-label">
+            {{ item.title }}
+          </span>
         </router-link>
       </li>
     </ul>
@@ -12,7 +14,7 @@
 </template>
 <script type="text/ecmascript-6">
 export default {
-  data() {
+  data () {
     return {
       list: [
         {

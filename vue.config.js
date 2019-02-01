@@ -1,16 +1,26 @@
-const path = require('path');
+const path = require('path')
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
+  // 项目部署的基础路径
+  // 我们默认假设你的应用将会部署在域名的根部，
+  // 比如 https://www.my-app.com/
+  // 如果你的应用时部署在一个子路径下，那么你需要在这里
+  // 指定子路径。比如，如果你的应用部署在
+  // https://www.foobar.com/my-app/
+  // 那么将这个值改为 `/my-app/`
+  publicPath: '/',
+  // 将构建好的文件输出到哪里
+  outputDir: 'dist',
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
   // https://webpack.js.org/configuration/dev-server/
   devServer: {
     port: 8085,
     https: false,
-    open: false, //配置自动启动浏览器
+    open: false, // 配置自动启动浏览器
     proxy: {
       '/api': {
         target: 'https://www.easy-mock.com/mock/59a8d6c14006183e48ef9caa/answer',
@@ -19,7 +29,7 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
-      },
+      }
     }
   },
   pwa: {
@@ -32,7 +42,7 @@ module.exports = {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       // swSrc is required in InjectManifest mode.
-      swSrc: 'src/registerServiceWorker.js',
+      swSrc: 'src/registerServiceWorker.js'
       // ...other Workbox options...
     }
   },
@@ -53,5 +63,5 @@ module.exports = {
   // https://cli.vuejs.org/guide/webpack.html#simple-configuration
   configureWebpack: (config) => {
 
-  },
+  }
 }

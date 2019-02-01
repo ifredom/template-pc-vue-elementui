@@ -1,52 +1,52 @@
 <template>
-    <header class="ta-header" :class="{ 'ta-fixed': fixed}">
-        <div class="is-left" :class="positionClass">
-            <span class="icon iconfont icon-fanhui1 backimg left-back" @click="$router.back()" v-if="!selfcallback"></span>
-            <span class="icon iconfont icon-fanhui1 backimg left-back" @click="_callback" v-else></span>
-            <slot name="left"></slot>
-        </div>
-        <div class="ta-header-text is-center">
-            {{title}}
-            <slot name="center"></slot>
-        </div>
-        <div class="ta-right is-right">
-            <slot name="right"></slot>
-        </div>
-    </header>
+  <header class="ta-header" :class="{ 'ta-fixed': fixed}">
+    <div class="is-left" :class="positionClass">
+      <span v-if="!selfcallback" class="icon iconfont icon-fanhui1 backimg left-back" @click="$router.back()" />
+      <span v-else class="icon iconfont icon-fanhui1 backimg left-back" @click="_callback" />
+      <slot name="left" />
+    </div>
+    <div class="ta-header-text is-center">
+      {{ title }}
+      <slot name="center" />
+    </div>
+    <div class="ta-right is-right">
+      <slot name="right" />
+    </div>
+  </header>
 </template>
- <script type="text/javascript">
-import { MessageBox } from 'mint-ui';
+<script type="text/javascript">
+import { MessageBox } from 'mint-ui'
 
 export default {
-    name: 'ta-header',
-    props: {
-        title: {
-            default: 'Answer',
-            type: String
-        },
-        selfcallback: {
-            type: Function
-        },
-        position: {
-            default: 'left',
-            type: String
-        },
-        fixed: Boolean,
-        back: Boolean
+  name: 'TaHeader',
+  props: {
+    title: {
+      default: 'Answer',
+      type: String
     },
-    computed: {
-        positionClass() {
-            return 'ta-' + this.position;
-        }
+    selfcallback: {
+      type: Function
     },
-    methods: {
-        _callback() {
-            if (this.selfcallback && this.selfcallback instanceof Function) {
-                this.selfcallback(...this);
-            }
-        }
+    position: {
+      default: 'left',
+      type: String
+    },
+    fixed: Boolean,
+    back: Boolean
+  },
+  computed: {
+    positionClass () {
+      return 'ta-' + this.position
     }
-};
+  },
+  methods: {
+    _callback () {
+      if (this.selfcallback && this.selfcallback instanceof Function) {
+        this.selfcallback(...this)
+      }
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

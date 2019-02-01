@@ -1,16 +1,16 @@
 import {
-  constantRouterMap
+  sidebarRouterMap
 } from '@/router/routes'
 
 const permission = {
   state: {
-    routers: constantRouterMap,
+    routers: sidebarRouterMap,
     addRouters: []
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
-      state.routers = constantRouterMap.concat(routers)
+      state.routers = sidebarRouterMap.concat(routers)
     }
   },
   actions: {
