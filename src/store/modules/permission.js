@@ -1,16 +1,16 @@
 import {
-  sidebarRouterMap
+  asynAddRouterMap
 } from '@/router/routes'
 
 const permission = {
   state: {
-    routers: sidebarRouterMap,
+    routers: asynAddRouterMap,
     addRouters: []
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
-      state.routers = sidebarRouterMap.concat(routers)
+      state.routers = asynAddRouterMap.concat(routers)
     }
   },
   actions: {
