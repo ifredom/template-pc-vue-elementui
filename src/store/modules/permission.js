@@ -1,37 +1,49 @@
-import {
-  asynAddRouterMap
-} from '@/router/routes'
+import { asyncRoutes, constantRoutes } from "@/router/routes";
 
-const permission = {
-  state: {
-    routers: asynAddRouterMap,
-    addRouters: []
-  },
-  mutations: {
-    SET_ROUTERS: (state, routers) => {
-      state.addRouters = routers
-      state.routers = asynAddRouterMap.concat(routers)
+/**
+ * Filter asynchronous routing tables by recursion
+ * @param routes asyncRoutes
+ */
+export function filterAsyncRoutes(routes) {
+  const res = [];
+
+  routes.forEach((route) => {
+    const tmp = { ...route };
+    if (tmp.children) {
+      tmp.children = filterAsyncRoutes(tmp.children);
     }
-  },
-  actions: {
-    GenerateRoutes ({
-      commit
-    }, data) {
-      return new Promise(resolve => {
-        const {
-          roles
-        } = data
-        let accessedRouters
-        if (roles.includes('admin')) {
-          accessedRouters = asyncRouterMap
-        } else {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
-        }
-        commit('SET_ROUTERS', accessedRouters)
-        resolve()
-      })
-    }
-  }
+    res.push(tmp);
+  });
+
+  return res;
 }
 
-export default permission
+const state = {
+  routes: [],
+  addRoutes: [],
+};
+
+const mutations = {
+  SET_ROUTES: (state, routes) => {
+    state.addRoutes = routes;
+    state.routes = constantRoutes.concat(routes);
+    console.log(state.routes);
+  },
+};
+
+const actions = {
+  generateRoutes({ commit }) {
+    return new Promise((resolve) => {
+      let accessedRoutes;
+      accessedRoutes = filterAsyncRoutes(asyncRoutes);
+      commit("SET_ROUTES", accessedRoutes);
+      resolve(accessedRoutes);
+    });
+  },
+};
+
+export default {
+  state,
+  mutations,
+  actions,
+};

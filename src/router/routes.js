@@ -1,7 +1,9 @@
 /* 模块 */
-import System from './system'
+import SingleStage from './modules/singlestage'
+import MultStage from './modules/multistage'
+import AsynStage from './modules/asynstage'
 
-const constantRouterMap = [{
+const constantRoutes = [{
     path: '/',
     name: 'default',
     redirect: '/login'
@@ -17,8 +19,9 @@ const constantRouterMap = [{
     redirect: '/index/workplat',
     component: resolve => require(['@/views/layout/Index'], resolve),
     meta: {
-      title: 'Example',
-      icon: 'icon-fenleiorguangchangorqitatianchong'
+      title: '示例',
+      icon: 'icon-fenleiorguangchangorqitatianchong',
+      affix: true
     },
     children: [{
         name: '404',
@@ -37,28 +40,23 @@ const constantRouterMap = [{
       {
         name: '首页',
         path: 'workplat',
-        component: resolve => require(['@/views/layout/PlatForm'], resolve)
+        component: resolve => require(['@/views/layout/PlatForm'], resolve),
+        meta:{
+          affix: true
+        }
       },
-      // 加载每一个业务模块
-      ...System
+      // 预设值，加载每一个业务模块
+      ...SingleStage,
+      ...MultStage,
     ],
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     }
   }
 ]
 
-export const asynAddRouterMap = [{
-    name: '404',
-    path: '/404',
-    component: () => import('@/components/common/errorPage/404')
-  },
-  {
-    name: 'HelloWorld',
-    path: '/HelloWorld',
-    component: () => import('@/views/HelloWorld'),
-    children: [...System],
-  },
+export const asyncRoutes = [
+  ...AsynStage
 ]
 
-export default constantRouterMap
+export default constantRoutes
