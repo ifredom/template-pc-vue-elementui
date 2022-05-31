@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>Page 页面一</h1>
+    <h1>………………页面一………………</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Page1'
-}
+  name: "Page1",
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,11 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 @mixin colorBtn($color) {
   background: $color;
+
   &:hover {
     color: $color;
+
     &:before,
     &:after {
       background: $color;
@@ -12,31 +14,31 @@
 }
 
 .blue-btn {
-  @include colorBtn($blue)
+  @include colorBtn($blue);
 }
 
 .light-blue-btn {
-  @include colorBtn($light-blue)
+  @include colorBtn($light-blue);
 }
 
 .red-btn {
-  @include colorBtn($red)
+  @include colorBtn($red);
 }
 
 .pink-btn {
-  @include colorBtn($pink)
+  @include colorBtn($pink);
 }
 
 .green-btn {
-  @include colorBtn($green)
+  @include colorBtn($green);
 }
 
 .tiffany-btn {
-  @include colorBtn($tiffany)
+  @include colorBtn($tiffany);
 }
 
 .yellow-btn {
-  @include colorBtn($yellow)
+  @include colorBtn($yellow);
 }
 
 .pan-btn {
@@ -49,17 +51,20 @@
   transition: 600ms ease all;
   position: relative;
   display: inline-block;
+
   &:hover {
     background: #fff;
+
     &:before,
     &:after {
       width: 100%;
       transition: 600ms ease all;
     }
   }
+
   &:before,
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     right: 0;
@@ -67,6 +72,7 @@
     width: 0;
     transition: 400ms ease all;
   }
+
   &::after {
     right: inherit;
     top: inherit;
@@ -91,4 +97,3 @@
   font-size: 14px;
   border-radius: 4px;
 }
-

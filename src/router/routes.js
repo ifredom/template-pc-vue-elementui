@@ -1,62 +1,77 @@
-/* 模块 */
-import SingleStage from './modules/singlestage'
-import MultStage from './modules/multistage'
-import AsynStage from './modules/asynstage'
+/* Layout */
+import Layout from "@/views/layout";
 
-const constantRoutes = [{
-    path: '/',
-    name: 'default',
-    redirect: '/login'
+/* 模块 */
+import SingleStage from "./modules/singlestage";
+import MultStage from "./modules/multistage";
+import AsynRoutes from "./modules/asyns";
+
+export const constantRoutes = [
+  {
+    path: "/redirect",
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: () => import("@/views/redirect/index"),
+      },
+    ],
   },
   {
-    name: 'login',
-    path: '/login',
-    component: resolve => require(['@/views/login/Login'], resolve)
+    path: "/",
+    name: "default",
+    redirect: "/login",
   },
   {
-    name: '主页',
-    path: '/index',
-    redirect: '/index/workplat',
-    component: resolve => require(['@/views/layout/Index'], resolve),
+    name: "login",
+    path: "/login",
+    component: (resolve) => require(["@/views/login/Login"], resolve),
+    hidden: true,
     meta: {
-      title: '示例',
-      icon: 'icon-fenleiorguangchangorqitatianchong',
-      affix: true
+      title: "登录",
     },
-    children: [{
-        name: '404',
-        path: '404',
-        component: resolve => require(['@/components/common/errorPage/404'], resolve),
+  },
+  {
+    name: "首页",
+    path: "/index",
+    component: (resolve) => require(["@/views/layout"], resolve),
+    meta: {
+      title: "首页",
+      icon: "el-icon-menu",
+      affix: true,
+      requiresAuth: false,
+    },
+    children: [
+      {
+        name: "404",
+        path: "404",
+        component: (resolve) =>
+          require(["@/components/common/errorPage/404"], resolve),
         meta: {
-          title: '404',
-          icon: 'icon-fenleiorguangchangorqitatianchong'
+          title: "404",
+          icon: "el-icon-scissors",
         },
+        hidden: true,
       },
       {
-        name: '500',
-        path: '500',
-        component: resolve => require(['@/components/common/errorPage/500'], resolve)
-      },
-      {
-        name: '首页',
-        path: 'workplat',
-        component: resolve => require(['@/views/layout/PlatForm'], resolve),
-        meta:{
-          affix: true
-        }
+        name: "500",
+        path: "500",
+        component: (resolve) =>
+          require(["@/components/common/errorPage/500"], resolve),
+        hidden: true,
+        meta: {
+          title: "500",
+          icon: "el-icon-umbrella",
+        },
       },
       // 预设值，加载每一个业务模块
       ...SingleStage,
       ...MultStage,
     ],
-    meta: {
-      requiresAuth: false
-    }
-  }
-]
+  },
+];
 
-export const asyncRoutes = [
-  ...AsynStage
-]
+export const asyncRoutes = [...AsynRoutes];
 
-export default constantRoutes
+export default constantRoutes;
