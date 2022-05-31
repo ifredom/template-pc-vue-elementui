@@ -1,10 +1,8 @@
 <template>
   <div class="page">
     <div class="page-login">
-      <h3 class="login-title">
-        归属
-      </h3>
-      <br>
+      <h3 class="login-title">归属</h3>
+      <br />
       <el-form ref="form" :model="formData" :rules="formRules">
         <el-form-item prop="username">
           <el-input
@@ -26,7 +24,11 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button :loading="loading" type="primary" @click.prevent="handleLogin('form')">
+          <el-button
+            :loading="loading"
+            type="primary"
+            @click.prevent="handleLogin('form')"
+          >
             入
           </el-button>
         </el-form-item>
@@ -38,93 +40,97 @@
 </template>
 
 <script>
-import Bubble from '@/components/BubbleAnimation/Bubble'
+import Bubble from "@/components/BubbleAnimation/Bubble";
 
 export default {
-  name: 'Login',
+  name: "Login",
   components: {
-    Bubble
+    Bubble,
   },
-  data () {
+  data() {
     const validateUsername = (rule, value, callback) => {
-      if (value == '') {
-        callback(new Error('账号不能为空'))
+      if (value == "") {
+        callback(new Error("账号不能为空"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('密码不少于6位'))
+        callback(new Error("密码不少于6位"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     return {
       // 绑定在表单上的字段取名，固定为formData
       formData: {
-        username: 'ifredom',
-        password: '123456'
+        username: "ifredom",
+        password: "123456",
       },
       // 绑定在表单上的规则字段取名，固定为formRules
       formRules: {
-        username: [{
-          required: true,
-          trigger: 'blur',
-          validator: validateUsername
-        }],
-        password: [{
-          required: true,
-          trigger: 'blur',
-          validator: validatePassword
-        }]
+        username: [
+          {
+            required: true,
+            trigger: "blur",
+            validator: validateUsername,
+          },
+        ],
+        password: [
+          {
+            required: true,
+            trigger: "blur",
+            validator: validatePassword,
+          },
+        ],
       },
       loading: false,
       showDialog: false,
-      redirect: undefined
-    }
+      redirect: undefined,
+    };
   },
   watch: {
     $route: {
       handler: function (route) {
-        this.redirect = route.query && route.query.redirect
+        this.redirect = route.query && route.query.redirect;
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
-    showPwd () {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
+    showPwd() {
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password'
+        this.passwordType = "password";
       }
     },
-    handleLogin (formName) {
-      this.$refs[formName].validate(valid => {
+    handleLogin(formName) {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.loading = true
+          this.loading = true;
           this.$store
-            .dispatch('LoginByUsername', this.formData)
-            .then(res => {
+            .dispatch("user/LoginByUsername", this.formData)
+            .then((res) => {
               if (res.code === 0) {
-                this.loading = false
+                this.loading = false;
                 this.$router.push({
-                  path: this.redirect || '/index'
-                })
+                  path: this.redirect || "/index",
+                });
               }
             })
             .catch(() => {
-              this.loading = false
-            })
+              this.loading = false;
+            });
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
