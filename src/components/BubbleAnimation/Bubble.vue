@@ -15,10 +15,10 @@
 
 <script>
 export default {
-  name: 'Bubbles'
-}
+  name: "Bubbles",
+};
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/style/components/css3bg.css'
+@import "~@/styles/components/css3bg.css";
 </style>

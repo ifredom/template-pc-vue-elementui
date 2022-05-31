@@ -1,19 +1,16 @@
-# myapp
+# latest-vue2-admin-template
 
 ## Project setup
 
 ```bash
 # 安装
 yarn install
-# 注意如果安装这一步报错，那么多半是node-sass模块安装报错
-# 这是由于使用了淘宝镜像的缘故，将源从淘宝镜像切换为正常分支，再执行一次安装即可
-
 # 启动
-yarn run serve
+yarn serve
 # 打包构建
-yarn run build
+yarn build
 # 对所有文件进行语法检测
-yarn run lint
+yarn lint
 ```
 
 ## 注意

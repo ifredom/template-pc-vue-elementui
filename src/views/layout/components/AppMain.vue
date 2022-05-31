@@ -2,8 +2,7 @@
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
-      <router-view :key="key"></router-view>
-      <!-- <router-view></router-view> -->
+        <router-view :key="key"></router-view>
       </keep-alive>
     </transition>
   </section>
@@ -11,16 +10,16 @@
 
 <script>
 export default {
-  name: 'AppMain',
+  name: "AppMain",
   computed: {
-    cachedViews () {
-      return this.$store.state.tagsView.cachedViews
+    cachedViews() {
+      return this.$store.state.tagsView.cachedViews;
     },
-    key () {
-      return this.$route.fullPath
-    }
-  }
-}
+    key() {
+      return this.$route.fullPath;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -32,4 +31,3 @@ export default {
   overflow: hidden;
 }
 </style>
-

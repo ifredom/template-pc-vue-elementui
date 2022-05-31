@@ -1,39 +1,66 @@
 <template>
-  <el-scrollbar wrapClass="scrollbar-wrapper">
-    <el-menu
-      mode="vertical"
-      :show-timeout="200"
-      :default-active="$route.path"
-      :collapse="isCollapse"
-      background-color="#304156"
-      text-color="#bfcbd9"
-      active-text-color="#409EFF"
-    >
-      <sidebar-item
-        v-for="route in routes"
-        :key="route.meta.path"
-        :item="route"
-        :base-path="route.meta.path"
-      ></sidebar-item>
-    </el-menu>
-  </el-scrollbar>
+  <div :class="{ 'has-logo': showLogo }">
+    <logo v-if="showLogo" :collapse="isCollapse" />
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+      <el-menu
+        :default-active="activeMenu"
+        :collapse="isCollapse"
+        :background-color="variables.menuBg"
+        :text-color="variables.menuText"
+        :unique-opened="false"
+        :active-text-color="variables.menuActiveText"
+        :collapse-transition="false"
+        mode="vertical"
+      >
+        <sidebar-item
+          v-for="route in menuRoutes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        ></sidebar-item>
+        <!-- <sidebar-item
+          v-for="route in permission_routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        /> -->
+      </el-menu>
+    </el-scrollbar>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
-import sidebarData from "@/router/sidebarData";
+import variables from "@/styles/variables.scss";
 
+import { constantRoutes } from "@/router/routes";
 export default {
-  components: { SidebarItem },
+  components: { SidebarItem, Logo },
   computed: {
-    ...mapGetters(["sidebar"]),
+    ...mapGetters(["permission_routes", "sidebar"]),
     /**
-     * !可选参数 [sidebarData|]
-     * ?sidebarData  菜单根据接口返回数据显示。此处使用的模拟Mock数据
+
+     * ? menuRoutes  菜单根据接口返回数据显示。此处使用的模拟Mock数据
      */
-    routes() {
-      return sidebarData;
+    menuRoutes() {
+      return constantRoutes;
+    },
+    activeMenu() {
+      const route = this.$route;
+      const { meta, path } = route;
+      // if set path, the sidebar will highlight the path you set
+      if (meta.activeMenu) {
+        return meta.activeMenu;
+      }
+      return path;
+    },
+    showLogo() {
+      return this.$store.state.settings.sidebarLogo;
+    },
+    variables() {
+      return variables;
     },
     isCollapse() {
       return !this.sidebar.opened;

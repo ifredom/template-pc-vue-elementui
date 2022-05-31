@@ -27,7 +27,6 @@ const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes;
     state.routes = constantRoutes.concat(routes);
-    console.log(state.routes);
   },
 };
 
@@ -43,6 +42,7 @@ const actions = {
 };
 
 export default {
+  // namespaced: true,
   state,
   mutations,
   actions,
