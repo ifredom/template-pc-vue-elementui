@@ -83,3 +83,8 @@
     display: block;
   }
 }
+
+// fix date-picker part show sepator
+.el-range-separator {
+  width: 20px !important;
+}

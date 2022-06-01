@@ -26,6 +26,16 @@
         <el-form-item label="描述">
           <el-input v-model="searchForm.description" placeholder="描述" />
         </el-form-item>
+        <el-form-item label="日期">
+          <el-date-picker
+            v-model="searchForm.date"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </el-form-item>
         <el-form-item label="">
           <el-button
             @click="onSearch"

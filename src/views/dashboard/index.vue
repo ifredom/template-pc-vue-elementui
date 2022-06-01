@@ -1,13 +1,21 @@
 <template>
   <div>
-    <h1>………………页面二………………</h1>
+    <div class="ta-card-box">
+      <el-card class="gva-card quick-entrance">
+        <template #header>
+          <div class="card-header">
+            <span>快捷入口</span>
+          </div>
+        </template>
+      </el-card>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Page2'
-}
+  name: "Page2",
+};
 </script>
 
 <style lang="scss" scoped>

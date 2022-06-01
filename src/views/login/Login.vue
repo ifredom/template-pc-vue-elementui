@@ -23,7 +23,7 @@
           </el-input>
         </el-form-item>
 
-        <el-form-item>
+        <el-form-item class="text-right">
           <el-button
             :loading="loading"
             type="primary"
@@ -152,5 +152,8 @@ export default {
   padding: 15px;
   border-radius: 10px;
   z-index: 99;
+}
+.text-right {
+  text-align: right;
 }
 </style>
