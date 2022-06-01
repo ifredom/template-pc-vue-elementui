@@ -1,11 +1,11 @@
 <template>
-  <section class="app-main">
+  <el-main class="app-main">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
         <router-view :key="key"></router-view>
       </keep-alive>
     </transition>
-  </section>
+  </el-main>
 </template>
 
 <script>

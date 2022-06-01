@@ -1,9 +1,9 @@
 /* Layout */
-import Layout from "@/views/layout";
+import Layout from "@/layout";
 
 /* 模块 */
-import SingleStage from "./modules/singlestage";
-import MultStage from "./modules/multistage";
+import Dashboard from "./modules/dashboard";
+import SuperAdmin from "./modules/superAdmin";
 import AsynRoutes from "./modules/asyns";
 
 export const constantRoutes = [
@@ -35,7 +35,7 @@ export const constantRoutes = [
   {
     name: "首页",
     path: "/index",
-    component: (resolve) => require(["@/views/layout"], resolve),
+    component: (resolve) => require(["@/layout"], resolve),
     meta: {
       title: "首页",
       icon: "el-icon-menu",
@@ -65,9 +65,22 @@ export const constantRoutes = [
           icon: "el-icon-umbrella",
         },
       },
-      // 预设值，加载每一个业务模块
-      ...SingleStage,
-      ...MultStage,
+      // 加载每一个业务模块
+      ...SuperAdmin,
+    ],
+  },
+  {
+    name: "仪表盘",
+    path: "/dashboard",
+    component: (resolve) => require(["@/layout"], resolve),
+    meta: {
+      title: "仪表盘",
+      icon: "el-icon-menu",
+      requiresAuth: false,
+    },
+    children: [
+      // 加载每一个业务模块
+      ...Dashboard,
     ],
   },
 ];

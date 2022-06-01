@@ -14,9 +14,9 @@ import i18n from "./lang"; // 国际化
 import "./icons"; // SVG以及字体图标
 import "./utils/error-log"; // 错误日志
 import "./mock"; // 模拟数据
-import * as filters from "./filters"; // 全局过滤器
+import * as filters from "./utils/filters"; // 全局过滤器
+import Constants from "./constants"; // 常量
 
-Vue.config.productionTip = false;
 Vue.use(Element, {
   size: Cookies.get("size") || "medium", // 设置elementUI尺寸
   i18n: (key, value) => i18n.t(key, value),
@@ -26,6 +26,10 @@ Vue.use(Element, {
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 });
+
+Vue.config.productionTip = false;
+
+Vue.prototype.Constants = Constants;
 
 new Vue({
   router,

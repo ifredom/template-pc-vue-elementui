@@ -1,10 +1,14 @@
 /** 一级路由 */
 export default [
   {
-    name: "异步菜单",
+    name: "异步menu",
     path: "/asyncPage",
     component: (r) =>
-      require.ensure([], () => r(require("@/views/page1")), "HelloWorld"),
-    icon: "icon-fenleiorguangchangorqitatianchong",
+      require.ensure([], () => r(require("@/views/asyns")), "asyns"),
+    meta: {
+      id: "10004",
+      icon: "el-icon-news",
+      title: "asyns",
+    },
   },
 ];
